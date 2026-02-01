@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { SignJWT, jwtVerify } from 'jose';
+import { SignJWT, jwtVerify, JWTPayload } from 'jose';
 import SYSTEM_CONFIG from '../system';
 
 const secret = new TextEncoder().encode(
@@ -13,7 +13,14 @@ export interface SessionData {
 }
 
 export async function createSession(data: SessionData) {
-  const token = await new SignJWT(data)
+  // Convert SessionData -> JWTPayload (required by jose types)
+  const payload: JWTPayload & SessionData = {
+    ...data,
+    // optional but recommended standard claim
+    sub: data.userId,
+  };
+
+  const token = await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime('7d')
@@ -37,7 +44,21 @@ export async function getSession(): Promise<SessionData | null> {
 
   try {
     const { payload } = await jwtVerify(token, secret);
-    return payload as SessionData;
+
+    // Optional: basic validation (avoid undefined fields)
+    const userId = payload.userId;
+    const role = payload.role;
+    const name = payload.name;
+
+    if (
+      typeof userId !== 'string' ||
+      (role !== 'admin' && role !== 'student') ||
+      typeof name !== 'string'
+    ) {
+      return null;
+    }
+
+    return { userId, role, name };
   } catch {
     return null;
   }

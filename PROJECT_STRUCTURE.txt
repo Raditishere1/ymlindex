@@ -1,0 +1,69 @@
+online-quiz-free-vercel/
+├── app/
+│   ├── admin/
+│   │   ├── dashboard/
+│   │   │   └── page.tsx
+│   │   ├── login/
+│   │   │   └── page.tsx
+│   │   └── quiz/
+│   │       ├── create/
+│   │       │   └── page.tsx
+│   │       └── [id]/
+│   │           └── page.tsx
+│   ├── api/
+│   │   ├── admin/
+│   │   │   ├── login/
+│   │   │   │   └── route.ts
+│   │   │   └── quiz/
+│   │   │       └── route.ts
+│   │   ├── logout/
+│   │   │   └── route.ts
+│   │   └── student/
+│   │       ├── register/
+│   │       │   └── route.ts
+│   │       └── submit/
+│   │           └── route.ts
+│   ├── student/
+│   │   ├── dashboard/
+│   │   │   └── page.tsx
+│   │   ├── quiz/
+│   │   │   └── [id]/
+│   │   │       └── page.tsx
+│   │   ├── register/
+│   │   │   └── page.tsx
+│   │   └── result/
+│   │       └── [id]/
+│   │           └── page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── LogoutButton.tsx
+│   ├── QuizForm.tsx
+│   └── QuizInterface.tsx
+├── docs/
+│   ├── DEPLOY_VERCEL.md
+│   ├── FREE_TIER.md
+│   ├── INSTALL_FLOW.md
+│   └── SETUP_DATABASE.md
+├── lib/
+│   ├── prisma.ts
+│   ├── session.ts
+│   └── upload.ts
+├── prisma/
+│   └── schema.prisma
+├── public/
+│   └── uploads/
+│       └── .gitkeep
+├── .env
+├── .env.example
+├── .gitignore
+├── next.config.js
+├── next-env.d.ts
+├── package.json
+├── postcss.config.js
+├── README.md
+├── system.js
+├── tailwind.config.js
+├── tsconfig.json
+└── vercel.json
